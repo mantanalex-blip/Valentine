@@ -1,1 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Private Invitation</title>
 
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    overflow:hidden;
+    color:white;
+    background:linear-gradient(270deg,#ff4e7a,#ff758c,#ff7eb3);
+    background-size:600% 600%;
+    animation:gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    background:rgba(0,0,0,0.35);
+    padding:40px;
+    border-radius:15px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 40px rgba(255,255,255,0.3);
+    width:90%;
+    max-width:420px;
+}
+
+input{
+    padding:12px;
+    margin-top:20px;
+    width:80%;
+    border:none;
+    border-radius:8px;
+    text-align:center;
+    font-size:16px;
+}
+
+button{
+    padding:12px 25px;
+    margin-top:15px;
+    background:#ff4e7a;
+    border:none;
+    cursor:pointer;
+    border-radius:8px;
+    font-weight:bold;
+    color:white;
+}
+
+button:hover{background:#ff2f63;}
+
+.hidden{display:none;}
+
+.heart{
+    font-size:50px;
+    animation:pulse 1s infinite;
+    margin-top:15px;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.25);}
+    100%{transform:scale(1);}
+}
+
+/* inimioare */
+.floating-heart{
+    position:absolute;
+    font-size:20px;
+    animation:fall linear infinite;
+    opacity:0.7;
+}
+
+@keyframes fall{
+    from{transform:translateY(-10vh);}
+    to{transform:translateY(110vh);}
+}
+
+/* catei */
+.dogs{
+    margin-top:25px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    font-size:60px;
+    animation:kiss 2s infinite alternate ease-in-out;
+}
+
+@keyframes kiss{
+    from{gap:40px;}
+    to{gap:5px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="loginBox">
+    <h1>🔒 Private Invitation</h1>
+    <p>Only one person in the world can unlock this.</p>
+    <input type="password" id="password" placeholder="Enter password">
+    <br>
+    <button onclick="checkPassword()">Unlock</button>
+</div>
+
+<div class="container hidden" id="successBox">
+    <h1>❤️ Access Granted</h1>
+    <p>You unlocked my heart.</p>
+
+    <p style="margin-top:15px;">
+        I want to invite you to a<br>
+        <strong>Netflix Movie Night 🎬</strong>
+    </p>
+
+    <p>
+        🕖 Time: <strong>19:00</strong><br>
+        🎥 Movie: <strong>Surprise</strong>
+    </p>
+
+    <p style="margin-top:20px;font-size:20px;">
+        Will you be my Valentine? ❤️
+    </p>
+
+    <div class="heart">❤️</div>
+
+    <!-- catei care se pupă -->
+    <div class="dogs">
+        🐶❤️🐶
+    </div>
+</div>
+
+<script>
+function checkPassword(){
+    const correctPassword="sidequest";
+    const enteredPassword=document.getElementById("password").value;
+
+    if(enteredPassword===correctPassword){
+        document.getElementById("loginBox").classList.add("hidden");
+        document.getElementById("successBox").classList.remove("hidden");
+    }else{
+        alert("Wrong password… try again ❤️");
+    }
+}
+
+// inimioare animate
+function createHeart(){
+    const heart=document.createElement("div");
+    heart.classList.add("floating-heart");
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(Math.random()*3+4)+"s";
+    heart.style.fontSize=(Math.random()*20+15)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),7000);
+}
+setInterval(createHeart,300);
+</script>
+
+</body>
+</html>
